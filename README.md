@@ -27,8 +27,11 @@ bằng các công cụ thống kê, so sánh có kiểm soát và thiết kế p
 - EDA và xây dựng quy trình tiền xử lý cho tập dữ liệu hình ảnh bệnh lý lá cây.
 - Mục tiêu là làm sạch dữ liệu, trích xuất đặc trưng hình học/màu sắc.
 ### Xử lý văn bản dạng bảng
+- Từ kết quả EDA, quyết định cách xử lý outlier và scaling, xây dựng pipeline tiền xử lý hợp lý
+- Làm sạch và chuẩn hóa dữ liệu đầu vào, đưa dữ liệu về dạng phù hợp cho mô hình học máy, đánh giá định lượng các phương pháp tiền xử lý
 ### Xử lý văn bản dạng văn bản
-
+- Xử lý dữ liệu văn bản với các text là các bài review sau khi xem phim, label là tích cực hoặc tiêu cực
+- Là bài toán dự đoán cảm xúc dựa trên văn bản
 
 ---
 
