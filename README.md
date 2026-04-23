@@ -43,8 +43,8 @@ Group_3/
 |   |   |   |-- class_folders
 |   |   |   |-- images
 |   |   |   |-- labels.csv
-|   |   |--                                    # Tập dữ liệu dạng bảng
-|   |   |--                                    # Tập dữ liệu văn bản
+|   |   |-- adult.csv                          # Tập dữ liệu dạng bảng
+|   |   |-- Movie_Reviews.csv                  # Tập dữ liệu văn bản
 |   |-- processed/                             # Chứa dữ liệu sau tiền xử lý (CSV, ảnh biểu đồ, dữ liệu sau tiền xử lý)
 |   |   |--  processed_image
 |   |   |--  processed_tabular
@@ -63,24 +63,46 @@ Group_3/
 
 ## Yêu cầu hệ thống & Cài đặt
 
-### 1. Phiên bản Python
-*   **Python:** khuyến nghị phiên bản **3.10** hoặc **3.11**.
+### Cài đặt thư viện
+# Tạo môi trường ảo
+python -m venv venv
 
-### 2. Cài đặt thư viện
-```bash
+# Kích hoạt môi trường ảo
+## Windows:
+```
+venv\Scripts\activate
+```
+## macOS / Linux:
+```
+source venv/bin/activate
+```
+# Tải thư viện
+```
 pip install -r requirements.txt
 ```
-*Xử lý dữ liệu ảnh:*
-*   `opencv-python` (4.10.0)
-*   `scikit-image` (0.24.0) - Tính SSIM/PSNR
-*   `scikit-learn` (1.5.0) - PCA, IncrementalPCA, Logistic Regression
-*   `ImageHash` (4.3.1) - Tính pHash phát hiện trùng lặp
-*   `seaborn` & `matplotlib` - Trực quan hóa dữ liệu
-*   `scipy` - Kiểm định ANOVA, KS-Test
-
-*Xử lý dữ liệu dạng bảng:*
-
-*Xử lý dữ liệu văn bản:*
+## Các thư viên và phiên bản của chúng
+--extra-index-url https://download.pytorch.org/whl/cpu
+Core AI & NLP
+torch (>=2.0.0)
+sentence-transformers (>=2.2.2)
+gensim (>=4.3.0)
+nltk (>=3.8)
+tokenizers (>=0.15.0)
+Data Science & ML
+numpy (<2.0.0)
+pandas (>=2.0.0)
+scipy (>=1.10.0)
+scikit-learn (>=1.3.0)
+statsmodels (>=0.14.0)
+Visualization
+matplotlib (>=3.7.0)
+seaborn (>=0.12.0)
+wordcloud (>=1.9.0)
+missingno (>=0.5.0)
+opencv-contrib-python (>=4.8.0)
+Jupyter Notebook Support
+ipykernel
+ipython
 
 ---
 
@@ -89,50 +111,25 @@ pip install -r requirements.txt
 ### 1. Dữ liệu gốc (Raw Data)
 #### **Link tải Dataset (Kaggle)**
 *   **Dataset dạng ảnh:** https://www.kaggle.com/datasets/tranbao0105/lab-2-1-newplantdiseasesdataset
-*   **Dataset dạng bảng:** https://drive.google.com/drive/u/1/folders/1BU1vanjqZDSGPOf7bW4bnTJSD4jfXAEX?fbclid=IwY2xjawRW535leHRuA2FlbQIxMQBzcnRjBmFwcF9pZAEwAAEeVgIsnePlPCCOg3WsUXsxD1c1h14LbGPDScyvT4FvihAE9fRw6MKQd0nok_E_aem__yWdSmhST8iSW6D_gRa93Q
-file: adult.csv
+*   **Dataset dạng bảng:** https://www.kaggle.com/datasets/tranbao0105/lab-1-2
 *   **Dataset dạng văn bản:** https://www.kaggle.com/datasets/tranbao0105/lab-2-3
 
 #### **Tải về và giải nén vào thư mục**
 *   **Dataset dạng ảnh:** `data/raw/lab_2.1_NewPlantDiseasesDataset/`. Đảm bảo file `labels.csv` nằm trong thư mục này.
-*   **Dataset dạng bảng:**
-*   **Dataset dạng văn bản:**
+*   **Dataset dạng bảng:** `data/raw/`. Đảm bảo file `adult.csv` nằm trong thư mục này.
+*   **Dataset dạng văn bản:** `data/raw/`. Đảm bảo file `Movie_Reviews.csv` nằm trong thư mục này.
 
-### 2. Dữ liệu đã xử lý (Processed Data)
-*   **1:** Chạy lần lượt các notebook `01_EDA_image.ipynb` và `02_preprocessing_image.ipynb`. Dữ liệu sẽ tự động được sinh ra trong thư mục `data/processed/` cho dữ liệu dạng ảnh, các dữ liệu khác sẽ nằm trong `data/processed/processed_['Loại dữ liệu']`
+### 2. Dữ liệu đã xử lý
+*   **1:** Chạy lần lượt các notebook. Dữ liệu sẽ tự động được sinh ra trong thư mục `data/processed/processed_['Loại dữ liệu']`
 *   **2:** Tải nhanh dữ liệu đã được nhóm xử lý sẵn.
 *   **Link tải Processed Data (Google Drive):** https://drive.google.com/drive/folders/1BU1vanjqZDSGPOf7bW4bnTJSD4jfXAEX?usp=sharing
-*     - Folder processed_image: Bao gồm các file csv kết quả, các ảnh biểu đồ và dữ liệu ảnh sau khi tiền xử lý
-*     - Folder processed_tabular:
+*     - Folder processed_image: Bao gồm các file csv kết quả thống kê, các ảnh biểu đồ và dữ liệu ảnh sau khi tiền xử lý
+*     - Folder processed_tabular: Bao gồm file dữ liệu sau khi xử lý
 *     _ Folder processed_text: Bao gồm các ảnh biểu đồ và file csv chứa dữ liệu sau khi tiền xử lý
-
----
-
-## Quy trình xử lý dữ liệu dạng ảnh
-
-### Giai đoạn 1: Phân tích EDA (`01_EDA_image.ipynb`)
-*   **Thống kê:** Tính phân phối Pixel, KDE theo kênh màu.
-*   **Mất cân bằng lớp:** Kiểm tra tỉ lệ giữa lớp nhiều nhất và ít nhất.
-*   **Phát hiện trùng lặp:** Sử dụng **pHash** (Perceptual Hash) để loại bỏ các ảnh trùng lặp tuyệt đối và ảnh gần trùng (Hamming Distance $\le$ 6). Phát hiện và xử lý ảnh bị gán nhãn sai (Mislabeled).
-*   **Phân tích cạnh (Nâng cao):** Sử dụng Sobel, Prewitt, Canny. Kiểm định **ANOVA** chứng minh mật độ cạnh có khả năng phân biệt lớp bệnh (p-value < 0.05).
-
-### Giai đoạn 2: Tiền xử lý & Ablation Study (`02_preprocessing_image.ipynb`)
-Thực hiện thí nghiệm so sánh tác động của từng kỹ thuật:
-*   **Resize:** Đánh giá mất mát thông tin qua SSIM và PSNR. Kích thước **64x64** được chọn làm tối ưu.
-*   **Không gian màu:** So sánh RGB, Gray, HSV, LAB qua PCA Explained Variance. **LAB** cho kết quả tốt nhất.
-*   **Chuẩn hóa:** Kiểm định **KS-Test** trên 4 phương pháp. **Z-score Per-channel** giúp mô hình đạt Accuracy cao nhất.
-*   **Ablation Study:** Đánh giá hiệu năng mô hình (Logistic Regression/KNN) qua từng bước thêm mới kỹ thuật.
-
-**Kết quả:** Kích thước 64x64 + Màu LAB + Z-score chuẩn hóa. (Lưu ý: Augmentation không được áp dụng cho pipeline cuối do làm giảm hiệu năng trên mô hình vector hóa đơn giản).
-
-## Chi tiết quy trình xử lý dữ liệu dạng bảng
-
-## Chi tiết quy trình xử lý dữ liệu văn bản
 
 ---
 
 ## Hướng dẫn chạy Notebook
 1.  Mở thư mục dự án bằng VS Code hoặc Jupyter Lab.
 2.  Đảm bảo dữ liệu raw đã đặt đúng vị trí.
-3.  Chạy **Notebook EDA** để thực hiện làm sạch dữ liệu.
-4.  Chạy **Notebook Preprocessing** để thực hiện tiền xử lý và sinh ra tập dữ liệu cuối cùng.
+3.  Chọn môi trường ảo đã thiết lập rồi chạy các file notebook
